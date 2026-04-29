@@ -1,0 +1,34 @@
+{
+  "name": "Model Trainer",
+  // 1. Nutze unser Dockerfile
+  "build": { "dockerfile": "../Dockerfile" },
+
+  // 2. Wichtige Hardware-Flags
+  "runArgs": [
+    "--gpus", "all",        // Gibt dem Container Zugriff auf deine NVIDIA Karte
+    "--shm-size", "16gb"    // Erhöht den gemeinsamen Speicher (wichtig für LLMs)
+  ],
+
+  // 3. Den HuggingFace Cache verbinden
+  "mounts": [
+    {
+      "source": "${localEnv:HOME}/.cache/huggingface",
+      "target": "/root/.cache/huggingface",
+      "type": "bind"
+    }
+  ],
+
+  // 4. VS Code Einstellungen im Container
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python", // Python Support
+        "astral-sh.uv",     // uv Unterstützung direkt im Editor
+        "ms-toolsai.jupyter"
+      ]
+    }
+  },
+
+  // 5. Befehl nach dem Start
+  "postCreateCommand": "uv pip install --system ipykernel && uv sync"
+}

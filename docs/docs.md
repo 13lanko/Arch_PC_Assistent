@@ -20,8 +20,8 @@ The end-state objective is a Reasoning-Capable Autonomous System Agent specifica
 
 ## To-Do:
 - # Phase 1:
-  - Set the project environment using Docker []
-  - Base model loading []
+  - Set the project environment using Docker [x]
+  - Base model loading [x]
   - Set a set of evaluation tasks []
   - Test the performance of the pretrained model using the eval-tasks []
   - provide a set of dataset for the Cold-Start SFT []
