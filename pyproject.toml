@@ -3,13 +3,21 @@ name = "arch-pc-assistent"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = "==3.13.*"
+
 dependencies = [
+    "torch==2.10.0",
+    "torchao==0.17.0",
+    "torchvision==0.25.0",
+    "trl==0.24.0",
+    "unsloth==2026.4.8",
+    "unsloth-zoo==2026.4.9",
+    "xformers==0.0.35",
+    "datasets==4.3.0",
+    "transformers==5.5.0",
     "accelerate>=1.13.0",
-    "datasets>=4.8.5",
     "huggingface-hub>=1.12.0",
     "ipykernel>=7.2.0",
     "ipywidgets>=8.1.8",
-    "transformers>=5.6.2",
-    "unsloth>=2025.7.2",
+    "tensorboard>=2.20.0",
 ]

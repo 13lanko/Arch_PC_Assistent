@@ -1,3 +1,26 @@
-models/
-*.checkpoint
-*.log
+# Virtuelle Umgebungen
+.venv/
+env/
+venv/
+ENV/
+
+# Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE & Editor Einstellungen
+.vscode/
+.idea/
+.DS_Store
+
+# Container & Tools (optional, aber empfohlen)
+.devcontainer/tmp/
+
+# Umgebungs-Variablen 
+.env
+.env.local
+.env.*.local
+
+# Unsloth Cache
+unsloth_compiled_cache/
