@@ -20,4 +20,8 @@ dependencies = [
     "ipykernel>=7.2.0",
     "ipywidgets>=8.1.8",
     "tensorboard>=2.20.0",
+    "anthropic>=0.97.0",
+    "python-dotenv>=1.2.2",
+    "trafilatura>=2.0.0",
+    "openai>=2.33.0",
 ]

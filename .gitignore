@@ -1,15 +1,16 @@
-# Virtuelle Umgebungen
+# Virtuelle env
 .venv/
 env/
 venv/
 ENV/
+
 
 # Python Cache & Bytecode
 __pycache__/
 *.py[cod]
 *$py.class
 
-# IDE & Editor Einstellungen
+# IDE & Editor setting
 .vscode/
 .idea/
 .DS_Store
@@ -17,10 +18,16 @@ __pycache__/
 # Container & Tools (optional, aber empfohlen)
 .devcontainer/tmp/
 
-# Umgebungs-Variablen 
+# env 
 .env
 .env.local
 .env.*.local
 
 # Unsloth Cache
 unsloth_compiled_cache/
+
+# source data
+/sources
+/dataset
+/code/notebooks/outputs
+/code/notebooks/arch_assistant_lora
