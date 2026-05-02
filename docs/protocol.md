@@ -12,3 +12,8 @@ Zur Vorbereitung der ersten Phase sollte eine API mit einem starken Reasoning-Mo
 
 Da dem Modell nicht nur Fakten, sondern auch Reasoning-Muster beigebracht werden sollen, sollte es eine bestimmte Formatierung annehmen, die bei der Generalisierung der Datensätze berücksichtigt wird. Dafür wird eine Python-Code-Vorlage entworfen, mit der sich durch Wechsel der Raw-Dataset-Quelle und des API-Keys sowie der Beschreibung der Prompt-Datensätze beliebige Datensätze nach eigene Wunsch destillieren lassen. Diese validiert man anschließend, damit es wirklich als Goldstandard-Datensatz gilt.
 
+Hierbei werden für die SFT 1.100 hochqualitative Datensätze mittels DeepSeek V4 aus Rohdaten (Arch Wiki) destilliert. Diese setzen sich aus ca. 670 Basis-Arch-Wissen und ca. 400 spezifischen Troubleshooting-Szenarien zusammen. Dieses Dataset folgt einem strikten Schema mit \<think\> für die interne Logik und \<answer\> für die finale Lösung.
+
+Für das technische Training-Setup wird eine NVIDIA RTX 4080 Super mit 16 GB VRAM verwendet. Dabei kommt das Unsloth-Framework mit 4-Bit-Quantisierung zur Speicheroptimierung zum Einsatz, um die Performance des Trainings zu steigern. Wie besprochen, wird hierbei nur die LoRA-Schicht trainiert. Dabei erzielten wir einen Trainingsverlust, der stabil von 1,7 auf ca. 0,7 sank, was eine erfolgreiche Konvergenz ohne Anzeichen von massivem Overfitting signalisiert.
+
+Nach der SFT-Phase erzwingt das Modell das gewünschte XML-Format. Die Inferenz-Tests zeigen außerdem, dass der Assistent bereits komplexe Abhängigkeiten, wie beispielsweise NVIDIA-spezifische Wayland-Konfigurationen, korrekt in den Denkprozess einbezieht.
