@@ -47,4 +47,4 @@ outputs/SFT/arch_assistant_lora_*/
 *.pth
 *.bin
 
-Embed_model/
+embed_model/
