@@ -1,14 +1,14 @@
 # Project 1: arch_agent
 
 ## Overview:
-An AI-powered, RAG-augmented system assistant for Arch Linux (Hyprland). Instead of acting as an unconstrained autonomous actor, the system focuses on structured reasoning, safe tool execution (Human-in-the-Loop), and acts as an experimental testbed to evaluate the effectiveness of Base Models vs. Fine-Tuned Models (SFT/GRPO) in a highly specific domain.
+An AI-powered, RAG-augmented system assistant for Arch Linux (Hyprland). Instead of acting as an unconstrained autonomous actor, the system focuses on structured reasoning, safe tool execution (Human-in-the-Loop), and acts as an experimental testbed to evaluate the effectiveness of Base Models vs. Fine-Tuned Models (SFT/RSFT) in a highly specific domain.
 
 ## Goal
-The end-state objective is a robust, reasoning-capable assistant that leverages Retrieval-Augmented Generation (RAG) to maintain up-to-date knowledge of the Arch Linux ecosystem. A core scientific goal of this project is to empirically prove whether domain-specific SFT/GRPO provides a measurable advantage over base models when both have access to the same RAG context.
+The end-state objective is a robust, reasoning-capable assistant that leverages Retrieval-Augmented Generation (RAG) to maintain up-to-date knowledge of the Arch Linux ecosystem. A core scientific goal of this project is to empirically prove whether domain-specific SFT/RSFT provides a measurable advantage over base models when both have access to the same RAG context.
 
 ## Meta Intention
 1. **Abstraction instead of specialization:** Create a framework for adaptive intelligence. Arch Linux serves as the “proof of concept”, but the architecture (Model + RAG + Tool-Calling) is generic enough to be adapted to any structured system by swapping the RAG database.
-2. **Theorie-Transfer:** Practical application and validation of concepts from the Hugging Face ecosystem (SFT, LoRA, GRPO, RAG, LLM-as-a-Judge) in a real-world environment.
+2. **Theorie-Transfer:** Practical application and validation of concepts from the Hugging Face ecosystem (SFT, LoRA, RSFT, RAG, LLM-as-a-Judge) in a real-world environment.
 3. **Rigorous MLOps & Evaluation:** Moving away from "vibes-based" AI development towards structured, reproducible evaluations using automated metrics and hold-out test sets.
 ## Backlog:
 1. This AI should work on both terminal and UI interface.
@@ -35,27 +35,29 @@ The end-state objective is a robust, reasoning-capable assistant that leverages 
 
 ---
 
-### [] Phase 2: GRPO Reasoning Optimization (Current Focus)
-* **Reward Function Design**
-    * [ ] Implementation of the Format Reward function (XML strictness)
-    * [ ] Implementation of the Reasoning Length Reward (avoidance of "lazy reasoning")
-    * [ ] Implementation of the Technical Accuracy Reward (validation of Arch keywords/syntax)
-* **GRPO Training Setup**
-    * [ ] Preparation of the prompt-only dataset (extraction of instructions without answers)
-    * [ ] Configuration of the vLLM backend within Unsloth for group generation (G=8)
-    * [ ] Execution of reinforcement training to reduce hallucinations
-* **Evaluation**
-    * [ ] Comparison test: SFT model vs. GRPO model (logic depth & error rate)
+### [ ] Phase 2: RAG Pipeline Setup (Retrieval-Augmented Generation)
+* **Data Ingestion**
+    * [x] Download raw documentation in Markdown format (has been already done in phase 1).
+* **Intelligent Chunking**
+    * [ ] Implement a text splitter (e.g., via LangChain) that respects Markdown headers (##) and keeps bash/config code blocks intact.
+    * [ ] Define optimal chunk size (e.g., ~500 tokens) to balance context quality and VRAM limits.
+* **Vector Store & Embedding**
+    * [ ] Set up a local embedding model optimized for code/technical text (e.g., nomic-embed-text or bge-m3).
+    * [ ] Initialize a local vector database (e.g., ChromaDB) and ingest the chunked Markdown files.
+* **Retrieval Scripting**
+    * [ ] Write a Python function that takes a user query, retrieves the Top-K (e.g., Top 3) chunks from ChromaDB, and injects them into the System Prompt.
 
 ---
 
-### [ ] Phase 3: Evaluation Framework & RAG Baseline (NEW PRIORITY)
-
-* **Test Dataset Creation**
-    * [ ] Create a hold-out test set of 50-100 real-world Arch/Hyprland scenarios (not included in Phase 1 training data).
-* **LLM-as-a-Judge Implementation**
-    * [ ] Set up an automated evaluation script using a strong judge model (e.g., Llama-3-70B, GPT-4o, or Claude).
-    * [ ] Define scoring rubrics for Accuracy, Helpfulness, and Hallucination rate.
-* **RAG Setup**
-    * [ ] Implement a lightweight vector store (e.g., ChromaDB or FAISS) loaded with current Arch Wiki/Hyprland docs.
-    * [ ] Test baseline performance: Evaluate Pretrained Qwen2.5-7B-Instruct (with and without RAG) against the Phase 1 SFT model (with and without RAG).
+### [ ] Phase 3: RSFT Optimization (Rejection Sampling Fine-Tuning)
+* **Context-Aware Offline Generation**
+    * [ ] Run the ~1,000 prompts through the RAG pipeline (Phase 2) to append factual context to each prompt.
+    * [ ] Generate $G=6$ different reasoning paths and answers per prompt locally via the finetuned model (using higher temperature for variance).
+* **LLM-as-a-Judge Evaluation (RLAIF)**
+    * [ ] Define a strict scoring rubric (JSON schema) focusing on Accuracy, Format, and Helpfulness.
+    * [ ] Send the generated answers to the DeepSeek-V4-Pro API for automated, high-quality scoring.
+* **Data Filtering & Formatting**
+    * [ ] Write a script to filter the DeepSeek results: Discard any answer that does not achieve a near-perfect score (The "Rejection" step).
+    * [ ] Format the remaining "Gold Standard" answers into a new SFT-ready JSONL dataset.
+* **RSFT Training Execution**
+    * [ ] Run a second SFT pass (using Unsloth) exclusively on this filtered, high-quality dataset to refine the model's logical reasoning and tool-use capabilities.

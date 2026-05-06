@@ -42,8 +42,9 @@ outputs/SFT/trainer/
 outputs/SFT/runs/
 outputs/SFT/arch_assistant_lora_*/
 
-# Falls du Dateien hast, die vom Training generiert werden:
 *.safetensors
 *.pt
 *.pth
 *.bin
+
+Embed_model/
