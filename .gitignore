@@ -31,3 +31,19 @@ unsloth_compiled_cache/
 /dataset
 /code/notebooks/outputs
 /code/notebooks/arch_assistant_lora
+
+# Python Caches
+__pycache__/
+*.pyc
+*.pyo
+
+# Trainings-Checkpoints und Outputs
+outputs/SFT/trainer/
+outputs/SFT/runs/
+outputs/SFT/arch_assistant_lora_*/
+
+# Falls du Dateien hast, die vom Training generiert werden:
+*.safetensors
+*.pt
+*.pth
+*.bin

@@ -1,15 +1,15 @@
 # Project 1: arch_agent
 
 ## Overview:
-An autonomous, AI-powered system manager for Arch Linux (Hyprland) that handles complex configuration and troubleshooting tasks through logical reasoning and active system access.
+An AI-powered, RAG-augmented system assistant for Arch Linux (Hyprland). Instead of acting as an unconstrained autonomous actor, the system focuses on structured reasoning, safe tool execution (Human-in-the-Loop), and acts as an experimental testbed to evaluate the effectiveness of Base Models vs. Fine-Tuned Models (SFT/GRPO) in a highly specific domain.
 
 ## Goal
-The end-state objective is a Reasoning-Capable Autonomous System Agent specifically optimized for the Arch Linux ecosystem. The model will function as a high-level controller capable of mapping abstract user intent to precise system-state transition.
+The end-state objective is a robust, reasoning-capable assistant that leverages Retrieval-Augmented Generation (RAG) to maintain up-to-date knowledge of the Arch Linux ecosystem. A core scientific goal of this project is to empirically prove whether domain-specific SFT/GRPO provides a measurable advantage over base models when both have access to the same RAG context.
 
 ## Meta Intention
-1. **Abstraction instead of specialization:** Create a framework for adaptive intelligence. Arch Linux serves as your “proof of concept” (the first application), but the architecture is so generic that it can be adapted to any structured system (OS, software suites, cloud infrastructure) by swapping out the knowledge module (retraining or RAG).
-2. **Theorie-Transfer:** Practical application and validation of concepts from the Hugging Face ecosystem (fine-tuning, LoRA, agentic workflows) in a real-world system environment.
-
+1. **Abstraction instead of specialization:** Create a framework for adaptive intelligence. Arch Linux serves as the “proof of concept”, but the architecture (Model + RAG + Tool-Calling) is generic enough to be adapted to any structured system by swapping the RAG database.
+2. **Theorie-Transfer:** Practical application and validation of concepts from the Hugging Face ecosystem (SFT, LoRA, GRPO, RAG, LLM-as-a-Judge) in a real-world environment.
+3. **Rigorous MLOps & Evaluation:** Moving away from "vibes-based" AI development towards structured, reproducible evaluations using automated metrics and hold-out test sets.
 ## Backlog:
 1. This AI should work on both terminal and UI interface.
 2. If this programme can work well, reduce the requirement of usage to run this with every local machine. (tiny version) 
@@ -49,12 +49,13 @@ The end-state objective is a Reasoning-Capable Autonomous System Agent specifica
 
 ---
 
-### [] Phase 3: Agentic Integration & System Access
-* **Tool Environment**
-    * [ ] Development of a "Safe Execution Environment" for shell commands
-    * [ ] Connection to Hyprland IPC for real-time UI control
-* **Interface**
-    * [ ] Development of the CLI controller (`arch-agent` command)
-    * [ ] Optional GUI integration for visual troubleshooting
-* **Optimization**
-    * [ ] "Tiny Version" porting (model distillation to 1.5B or 3B for local low-end machines)
+### [ ] Phase 3: Evaluation Framework & RAG Baseline (NEW PRIORITY)
+
+* **Test Dataset Creation**
+    * [ ] Create a hold-out test set of 50-100 real-world Arch/Hyprland scenarios (not included in Phase 1 training data).
+* **LLM-as-a-Judge Implementation**
+    * [ ] Set up an automated evaluation script using a strong judge model (e.g., Llama-3-70B, GPT-4o, or Claude).
+    * [ ] Define scoring rubrics for Accuracy, Helpfulness, and Hallucination rate.
+* **RAG Setup**
+    * [ ] Implement a lightweight vector store (e.g., ChromaDB or FAISS) loaded with current Arch Wiki/Hyprland docs.
+    * [ ] Test baseline performance: Evaluate Pretrained Qwen2.5-7B-Instruct (with and without RAG) against the Phase 1 SFT model (with and without RAG).
