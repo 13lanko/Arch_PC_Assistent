@@ -42,6 +42,7 @@ outputs/SFT/trainer/
 outputs/SFT/runs/
 outputs/SFT/arch_assistant_lora_*/
 outputs/
+embed_model/
 
 *.safetensors
 *.pt
