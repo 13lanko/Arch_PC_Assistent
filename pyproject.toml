@@ -29,4 +29,6 @@ dependencies = [
     "langchain-chroma>=1.1.0",
     "langchain-huggingface>=1.2.2",
     "sentence-transformers>=5.4.1",
+    "rich>=15.0.0",
+    "prompt-toolkit>=3.0.52",
 ]

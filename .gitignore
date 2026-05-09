@@ -41,6 +41,7 @@ __pycache__/
 outputs/SFT/trainer/
 outputs/SFT/runs/
 outputs/SFT/arch_assistant_lora_*/
+outputs/
 
 *.safetensors
 *.pt
