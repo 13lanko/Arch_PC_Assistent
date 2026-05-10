@@ -1,5 +1,8 @@
 # ArchAgent: Local AI Assistant for Arch Linux & Hyprland
 
+## 🔗 Links & Resources
+* **Trained LoRA Adapters (Hugging Face):** [https://huggingface.co/13lanko/arch-assistant-final-lora/tree/main](https://huggingface.co/13lanko/arch-assistant-final-lora/tree/main)
+
 ![Arch Linux](https://img.shields.io/badge/OS-Arch_Linux-1793d1?style=flat-square&logo=arch-linux&logoColor=white)
 ![Hyprland](https://img.shields.io/badge/WM-Hyprland-00a896?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3.11+-blue.svg?style=flat-square&logo=python&logoColor=white)
