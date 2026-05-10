@@ -49,4 +49,4 @@ embed_model/
 *.pth
 *.bin
 
-embed_model/
+/embed_model
